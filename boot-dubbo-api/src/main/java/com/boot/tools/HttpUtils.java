@@ -69,7 +69,7 @@ public class HttpUtils {
                 result += line;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            return "0";
         } finally {
             try {
                 if (in != null) {
@@ -83,18 +83,58 @@ public class HttpUtils {
     }
 
     public static void main(String[] args) {
+
+        Map<String,String> map = new HashMap<>();
+        map.put("type","lsjz");
+        map.put("code","001052");
+        map.put("page","1");
+        map.put("per","65535");
+        map.put("sdate","2021-03-16");
+        map.put("edate","2021-03-16");
+        String result = sendGet("https://fundf10.eastmoney.com/F10DataApi.aspx",map);
+        System.out.println(result);
+//        String result = sendGet("http://fund.eastmoney.com/js/fundcode_search.js",map);
+//        String[] strs = result.split("\\[");
+//        System.out.println(result);
+//        System.out.println(strs[0]);
+//        System.out.println(strs[1]);
+//        System.out.println(strs[2]);
+//        String[] split = strs[2].split(",");
+//        System.out.println(split[0].substring(1,split[0].length()-1));
+//        System.out.println(split[1]);
+//        System.out.println(split[2]);
+//        System.out.println(split[3]);
+//        System.out.println(strs[3]);
+//        System.out.println(strs[strs.length-1]);
+//        getAllFund();
+//        getFundInformation("001186");
+    }
+
+    /**
+     * 获取所有基金的基金编码、基金名称和基金类型
+     * @return
+     */
+    public static String getAllFund(){
         Map<String,String> map = new HashMap<>();
         String result = sendGet("http://fund.eastmoney.com/js/fundcode_search.js",map);
         String[] strs = result.split("\\[");
-        System.out.println(result);
-        System.out.println(strs[0]);
-        System.out.println(strs[1]);
-        System.out.println(strs[2]);
-        System.out.println(strs[3]);
-        System.out.println(strs[strs.length-1]);
+        for(int i = 2; i < strs.length; i++){
+            String[] temp = strs[i].split(",");
+            System.out.print(temp[0].substring(1,temp[0].length()-1)+",");
+            System.out.print(temp[2].substring(1,temp[2].length()-1)+",");
+            System.out.println(temp[3].substring(1,temp[3].length()-1));
+            getFundInformation(temp[0].substring(1,temp[0].length()-1));
+        }
+        return "0";
     }
 
-    public static String getAllFund(){
+    public static String getFundInformation(String fundCode){
+        Map<String,String> map = new HashMap<>();
+        map.put("rt","1463558676006");
+        String url = "http://fundgz.1234567.com.cn/js/";
+        url += fundCode+".js";
+        String result = sendGet(url,map);
+        System.out.println(result);
         return "0";
     }
 }
