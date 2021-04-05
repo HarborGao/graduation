@@ -38,7 +38,21 @@ function cliLogin() {
 		return;
 	}
 	
-	return false;
+	$.ajax({
+		url:'/user/login',
+		data:{
+			userPhone: txtUser,
+			userPwd: txtPwd
+		},
+		type: 'post',
+		success:function(data){
+			if(data == 1){
+				Tip('访问成功');
+			}else{
+				Tip('账号或密码错误');
+			}
+		}
+	});
 }
 //注册操作
 
@@ -49,6 +63,21 @@ function Sendpwd(sender) {
 		Tip('请填写手机号码！');
 		$("#phone").focus();
 		return;
+	}else{
+		$.ajax({
+			url:'/message/send',
+			data:{
+				userPhone: phones
+			},
+			type: 'post',
+			success:function(data){
+				if(data == 1){
+					Tip('短信发送成功！');
+				}else{
+					Tip('短信发送失败，请稍后再试！');
+				}
+			}
+		});
 	}
 	var code=$(sender);
 		if (validCode) {
@@ -62,7 +91,6 @@ function Sendpwd(sender) {
 			code.val("重新获取");
 				validCode=true;
 			code.removeClass("msgs1").attr("disabled",false);
-
 			}
 		},1000);
 		}

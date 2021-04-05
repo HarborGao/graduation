@@ -1,5 +1,8 @@
 package com.boot.tools;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,6 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 public class HttpUtils {
+
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
+
     /**
      * 发送GET请求
      *
@@ -84,15 +91,15 @@ public class HttpUtils {
 
     public static void main(String[] args) {
 
-        Map<String,String> map = new HashMap<>();
-        map.put("type","lsjz");
-        map.put("code","001052");
-        map.put("page","1");
-        map.put("per","65535");
-        map.put("sdate","2021-03-16");
-        map.put("edate","2021-03-16");
-        String result = sendGet("https://fundf10.eastmoney.com/F10DataApi.aspx",map);
-        System.out.println(result);
+//        Map<String,String> map = new HashMap<>();
+//        map.put("type","lsjz");
+//        map.put("code","001052");
+//        map.put("page","1");
+//        map.put("per","65535");
+//        map.put("sdate","2021-03-16");
+//        map.put("edate","2021-03-16");
+//        String result = sendGet("https://fundf10.eastmoney.com/F10DataApi.aspx",map);
+//        System.out.println(result);
 //        String result = sendGet("http://fund.eastmoney.com/js/fundcode_search.js",map);
 //        String[] strs = result.split("\\[");
 //        System.out.println(result);

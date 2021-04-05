@@ -22,6 +22,8 @@ spring:
     maxOpenPreparedStatements: 20
     mybatis:
       type-aliases-package:  entity
+server:
+  port: 8081
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

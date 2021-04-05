@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface LoginMapper {
     FundUser checkLogin(FundUser fundUser);
+    int addFundUser(FundUser fundUser);
 }

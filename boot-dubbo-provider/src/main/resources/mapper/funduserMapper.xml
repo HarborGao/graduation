@@ -4,4 +4,8 @@
     <select id="checkLogin" parameterType="com.boot.entity.FundUser" resultType="com.boot.entity.FundUser">
         select * from funduser where userPhone = #{userPhone} and userPwd = #{userPwd}
     </select>
+
+    <insert id="addFundUser" parameterType="com.boot.entity.FundUser">
+        insert into funduser (userPhone,userPwd) values (#{userPhone},#{userPwd})
+    </insert>
 </mapper>

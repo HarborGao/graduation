@@ -4,9 +4,11 @@ import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.xml.ws.http.HTTPException;
 import java.io.IOException;
+import java.security.SecureRandom;
 
 
 public class SmsUtils {
@@ -26,22 +28,23 @@ public class SmsUtils {
      * @param templateId 短信模板id
      * @return
      */
-    public static SmsSingleSenderResult sendCode(String phone, String nationCode, Integer templateId){
+    public static String sendCode(String  phone, String nationCode, Integer templateId){
+        System.out.println(phone);
         int appid = 1400494510;
         String[] phoneNumbers = {phone}; //手机号可以添很多。
         String smsSign = "港哥说Java"; //短信签名
         nationCode = nationCode.substring(1);
         SmsSingleSenderResult result = new SmsSingleSenderResult();
+        String num = getCheckNum();
         try {
-            String[] params = {"999999","5"};  //第一个参数传递{1}位置想要的内容，第二个传递{2}的内容，以此类推。
+            String[] params = {num,"5"};  //第一个参数传递{1}位置想要的内容，第二个传递{2}的内容，以此类推。
             SmsSingleSender sender = new SmsSingleSender(appid, SDKAppKey);
-            result = sender.sendWithParam(nationCode, phoneNumbers[0],
+            sender.sendWithParam(nationCode, phoneNumbers[0],
                     templateId, params, smsSign, "", "");
-            System.out.println(result);
         } catch (HTTPException | JSONException | IOException | com.github.qcloudsms.httpclient.HTTPException e) {
             e.printStackTrace();
         }
-        return result;
+        return num;
     }
 
 
@@ -49,11 +52,16 @@ public class SmsUtils {
      * @param args
      */
     public static void main(String[] args) {
-        SmsSingleSenderResult result2 = sendCode("13264677020", "+86", 892300);
-        JSONObject resultObject = JSONObject.parseObject(String.valueOf(result2));
-        String msg = resultObject.getString("errmsg");
-        if("OK".equals(msg)){
-            System.out.println("发送成功");
+        String result2 = sendCode("18871227913", "+86", 892300);
+        System.out.println(result2);
+    }
+
+    public static String getCheckNum(){
+        SecureRandom secureRandom = new SecureRandom();
+        StringBuilder checkNum = new StringBuilder();
+        for(int i = 0; i < 6; i++){
+            checkNum.append(secureRandom.nextInt(10));
         }
+        return checkNum.toString();
     }
 }
