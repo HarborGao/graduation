@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @SpringBootApplication
 @ImportResource({"classpath:config/spring-dubbo.xml"})
-@MapperScan(basePackages = {"com.boot.mapper.LoginMapper"})
+@MapperScan(basePackages = {"com.boot.mapper.*"})
 public class ProviderApplication {
 
     public static void main(String[] args) {
