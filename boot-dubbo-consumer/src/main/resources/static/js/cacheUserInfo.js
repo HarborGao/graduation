@@ -28,6 +28,7 @@ function initInfo(){
             }
             if(data.signature != null && $.trim(data.signature).length > 0){
                 $("#signature").val(data.signature)
+                $("#word").html(data.signature)
             }
         }
     })
@@ -51,9 +52,7 @@ function changeInformation(){
             signature: signature
         },
         type: 'post',
-        success:function(data){
-
-        }
+        async: false
     })
 }
 

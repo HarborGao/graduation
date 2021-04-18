@@ -1,11 +1,13 @@
 package com.boot.tools;
 
+import com.boot.entity.FundDictionary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -115,24 +117,27 @@ public class HttpUtils {
 //        System.out.println(strs[strs.length-1]);
 //        getAllFund();
 //        getFundInformation("001186");
+        getAllFund();
     }
 
     /**
      * 获取所有基金的基金编码、基金名称和基金类型
      * @return
      */
-    public static String getAllFund(){
+    public static List<FundDictionary> getAllFund(){
         Map<String,String> map = new HashMap<>();
+        List<FundDictionary> list = new ArrayList<>();
         String result = sendGet("http://fund.eastmoney.com/js/fundcode_search.js",map);
         String[] strs = result.split("\\[");
         for(int i = 2; i < strs.length; i++){
+            FundDictionary fundDictionary = new FundDictionary();
             String[] temp = strs[i].split(",");
-            System.out.print(temp[0].substring(1,temp[0].length()-1)+",");
-            System.out.print(temp[2].substring(1,temp[2].length()-1)+",");
-            System.out.println(temp[3].substring(1,temp[3].length()-1));
-            getFundInformation(temp[0].substring(1,temp[0].length()-1));
+            fundDictionary.setFundCode(temp[0].substring(1,temp[0].length()-1));
+            fundDictionary.setFundName(temp[2].substring(1,temp[2].length()-1));
+            fundDictionary.setFundType(temp[3].substring(1,temp[3].length()-1));
+            list.add(fundDictionary);
         }
-        return "0";
+        return list;
     }
 
     public static String getFundInformation(String fundCode){

@@ -18,7 +18,7 @@
 		<div class="layui-upload-list">
 			<img class="layui-upload-img layui-circle userFaceBtn userAvatar" id="userFace">
 		</div>
-		<p>由于是纯静态页面，所以只能显示一张随机的图片</p>
+		<p id="word">我的世界我做主！</p>
 	</div>
 	<div class="layui-col-md6 layui-col-xs12">
 		<div class="layui-form-item">
@@ -41,7 +41,7 @@
 		</div>
 		<div class="layui-form-item" pane="">
 			<label class="layui-form-label">性别</label>
-			<div class="layui-input-block userSex">
+			<div>
 				<input type="radio" id="man" name="sex" value="男" title="男" checked="">
 				<input type="radio" id="women" name="sex" value="女" title="女">
 				<input type="radio" id="secure" name="sex" value="保密" title="保密">
@@ -67,8 +67,7 @@
 		</div>
 		<div class="layui-form-item">
 			<div class="layui-input-block">
-				<button class="layui-btn" onclick="changeInformation()" lay-submit="" lay-filter="changeUser">立即更新</button>
-				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				<button class="layui-btn" onclick="changeInformation()">立即更新</button>
 			</div>
 		</div>
 	</div>
