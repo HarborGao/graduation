@@ -8,4 +8,8 @@
     <insert id="addFundUser" parameterType="com.boot.entity.FundUser">
         insert into funduser (userPhone,userPwd) values (#{userPhone},#{userPwd})
     </insert>
+
+    <select id="checkUser" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from funduser where userPhone = #{userPhone}
+    </select>
 </mapper>

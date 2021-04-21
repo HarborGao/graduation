@@ -49,7 +49,9 @@ public class HttpUtils {
                     params = temp_params.substring(0, temp_params.length() - 1);
                 }
             }
-            String full_url = url + "?" + params;
+            String full_url = url;
+            if(parameters.size() > 0)
+                full_url = url + "?" + params;
             System.out.println(full_url);
             // 创建URL对象
             java.net.URL connURL = new java.net.URL(full_url);
@@ -117,7 +119,8 @@ public class HttpUtils {
 //        System.out.println(strs[strs.length-1]);
 //        getAllFund();
 //        getFundInformation("001186");
-        getAllFund();
+//        getAllFund();
+        getIndex();
     }
 
     /**
@@ -138,6 +141,21 @@ public class HttpUtils {
             list.add(fundDictionary);
         }
         return list;
+    }
+
+    public static Map<String,String> getIndex(){
+        Map<String,String> map = new HashMap<>();
+        Map<String,String> result = new HashMap<>();
+        String shang = sendGet("http://hq.sinajs.cn/list=s_sh000001",map);
+        String[] shangArr = shang.split(",");
+        shangArr[1] = shangArr[1].substring(0,7);
+        result.put("shangIndex",shangArr[1]);
+        result.put("shangRate",shangArr[3]);
+        String shen = sendGet("http://hq.sinajs.cn/list=s_sz399001",map);
+        String[] shenArr = shen.split(",");
+        result.put("shenIndex",shenArr[1]);
+        result.put("shenRate",shenArr[3]);
+        return result;
     }
 
     public static String getFundInformation(String fundCode){

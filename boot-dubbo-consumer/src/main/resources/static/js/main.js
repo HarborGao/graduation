@@ -96,3 +96,20 @@ layui.use(['form','element','layer','jquery'],function(){
     })
 
 })
+
+function getIndex(){
+    $.ajax({
+        url: '/init/getIndexNumber',
+        data:{},
+        type: "get",
+        dataType: 'json',
+        success:function(data){
+            $("#shangIndex").html("当前点位："+data.shangIndex+"%");
+            $("#shangRate").html(data.shangRate);
+            $("#shenIndex").html("当前点位："+data.shenIndex+"%");
+            $("#shenRate").html(data.shenRate);
+        }
+    })
+}
+
+setInterval("getIndex()",10000);

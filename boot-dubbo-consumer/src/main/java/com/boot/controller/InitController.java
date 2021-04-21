@@ -3,6 +3,7 @@ package com.boot.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.boot.entity.UserInformation;
 import com.boot.service.UserInformationService;
+import com.boot.tools.HttpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,6 +51,12 @@ public class InitController {
             map.put("userEmail",redisTemplate.opsForValue().get("userEmail"));
         if(redisTemplate.opsForValue().get("signature") != null)
             map.put("signature",redisTemplate.opsForValue().get("signature"));
+        return map;
+    }
+
+    @RequestMapping("getIndexNumber")
+    public Map<String,String> getIndexNumber(){
+        Map<String,String> map = HttpUtils.getIndex();
         return map;
     }
 

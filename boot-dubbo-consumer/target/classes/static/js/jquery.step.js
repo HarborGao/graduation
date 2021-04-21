@@ -79,7 +79,9 @@
             },
             type: 'post',
             success:function(data){
-                if(data == 1){
+                if(data == 2){
+                    Tip('该用户已注册，请直接登录')
+                }else if(data == 1){
                     var yes = step.nextStep();
                 }else{
                     Tip('注册失败')
