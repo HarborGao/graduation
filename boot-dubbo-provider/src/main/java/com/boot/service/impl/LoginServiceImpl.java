@@ -22,4 +22,7 @@ public class LoginServiceImpl implements LoginService {
     public int addFundUser(FundUser fundUser) {
         return loginMapper.addFundUser(fundUser);
     }
+
+    @Override
+    public Integer checkUser(String userPhone) { return loginMapper.checkUser(userPhone); }
 }

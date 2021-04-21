@@ -55,6 +55,9 @@ public class LoginController {
     @RequestMapping("/register")
     @ResponseBody
     public String addFundUser(@RequestParam String userPhone, @RequestParam String userPass){
+        Integer count = loginService.checkUser(userPhone);
+        if(count > 0)
+            return "2";
         FundUser fundUser = new FundUser();
         fundUser.setUserPhone(userPhone);
         fundUser.setUserPwd(userPass);
