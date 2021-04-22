@@ -1,19 +1,19 @@
 {
 	"contentManagement": [
 		{
-			"title": "文章列表",
+			"title": "基金海洋",
 			"icon": "icon-text",
 			"href": "page/news/newsList.html",
 			"spread": false
 		},
 		{
-			"title": "图片管理",
+			"title": "我的收藏",
 			"icon": "&#xe634;",
 			"href": "page/img/images.html",
 			"spread": false
 		},
 		{
-			"title": "其他页面",
+			"title": "定投计算",
 			"icon": "&#xe630;",
 			"href": "",
 			"spread": false,
@@ -29,13 +29,13 @@
 	],
 	"memberCenter": [
 		{
-			"title": "用户中心",
+			"title": "用户管理",
 			"icon": "&#xe612;",
 			"href": "page/user/userList.html",
 			"spread": false
 		},
 		{
-			"title": "会员等级",
+			"title": "套餐推荐",
 			"icon": "icon-vip",
 			"href": "page/user/userGrade.html",
 			"spread": false

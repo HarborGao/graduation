@@ -52,7 +52,6 @@ public class HttpUtils {
             String full_url = url;
             if(parameters.size() > 0)
                 full_url = url + "?" + params;
-            System.out.println(full_url);
             // 创建URL对象
             java.net.URL connURL = new java.net.URL(full_url);
             // 打开URL连接
