@@ -7,4 +7,8 @@
             (CONCAT(date_format(NOW(), '%Y%m%d%H%i%s'),REPLACE(UUID(),'-',"")),#{item.fundCode},#{item.fundType},#{item.fundName})
         </foreach>
     </insert>
+
+    <select id="selectAllFundCodeByType" resultType="java.lang.String">
+        select fundCode from funddictionary
+    </select>
 </mapper>

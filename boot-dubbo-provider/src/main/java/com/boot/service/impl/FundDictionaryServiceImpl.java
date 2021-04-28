@@ -19,4 +19,9 @@ public class FundDictionaryServiceImpl implements FundDictionaryService {
     public int insertAllFund(List<FundDictionary> fundDictionaryList) {
         return fundDictionaryMapper.insertAllFund(fundDictionaryList);
     }
+
+    @Override
+    public List<String> selectAllFundCodeByType() {
+        return fundDictionaryMapper.selectAllFundCodeByType();
+    }
 }

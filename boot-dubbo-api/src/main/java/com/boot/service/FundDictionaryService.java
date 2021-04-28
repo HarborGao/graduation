@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface FundDictionaryService {
     int insertAllFund(List<FundDictionary> fundDictionaryList);
+    List<String> selectAllFundCodeByType();
 }
