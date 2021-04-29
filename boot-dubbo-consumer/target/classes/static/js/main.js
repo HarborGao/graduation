@@ -105,9 +105,25 @@ function getIndex(){
         dataType: 'json',
         success:function(data){
             $("#shangIndex").html("当前点位："+data.shangIndex);
-            $("#shangRate").html(data.shangRate);
+            $("#shangRate").html(data.shangRate+"%");
+            var sValue = data.shangRate.charAt(0);
+            if(sValue == '-'){
+                $("#shangIndex").attr("style","font-size: 30px;color:green;");
+                $("#shangRate").attr("style","font-size: 30px;color:green;");
+            }else{
+                $("#shangIndex").attr("style","font-size: 30px;color:red;");
+                $("#shangRate").attr("style","font-size: 30px;color:red;");
+            }
             $("#shenIndex").html("当前点位："+data.shenIndex);
-            $("#shenRate").html(data.shenRate);
+            $("#shenRate").html(data.shenRate+"%");
+            var zValue = data.shenRate.charAt(0);
+            if(zValue == '-'){
+                $("#shenIndex").attr("style","font-size: 30px;color:green;");
+                $("#shenRate").attr("style","font-size: 30px;color:green;");
+            }else{
+                $("#shenIndex").attr("style","font-size: 30px;color:red;");
+                $("#shenRate").attr("style","font-size: 30px;color:red;");
+            }
         }
     })
 }

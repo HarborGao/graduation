@@ -15,16 +15,8 @@
 		{
 			"title": "定投计算",
 			"icon": "&#xe630;",
-			"href": "",
-			"spread": false,
-			"children": [
-				{
-					"title": "404页面",
-					"icon": "&#xe61c;",
-					"href": "page/404.html",
-					"spread": false
-				}
-			]
+			"href": "page/calculate.html",
+			"spread": false
 		}
 	],
 	"memberCenter": [

@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.boot.entity.FundDictionary;
 import com.boot.entity.FundInformation;
 import com.boot.service.FundDictionaryService;
+import com.boot.service.FundInformationService;
 import com.boot.tools.HttpUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,9 @@ public class FundController {
 
     @Reference(version = "1.0.0")
     private FundDictionaryService fundDictionaryService;
+
+    @Reference(version = "1.0.0")
+    private FundInformationService fundInformationService;
 
     @ResponseBody
     @RequestMapping("/getAllFund")
@@ -47,23 +51,27 @@ public class FundController {
         int size = allCode.size();
         String codeStr = "";
         for(int index = 0; index < size; index++){
-            if(index % 100 == 0){
+            if(index % 50 == 0){
                 codeStr += allCode.get(index);
                 List<FundInformation> list = new ArrayList<>();
                 String fundInformation = HttpUtils.getFundInformation(codeStr);
                 JSONObject jsonObject = JSONObject.parseObject(fundInformation);
                 JSONArray data = jsonObject.getJSONArray("data");
-                for(int i = 0; i < data.size(); i++){
-                    FundInformation temp = new FundInformation();
-                    temp.setFundCode(data.getJSONObject(i).getString("code"));
-                    temp.setCurNetWorth(data.getJSONObject(i).getString("netWorth"));
-                    temp.setTodayProfit(data.getJSONObject(i).getString("dayGrowth"));
-                    temp.setWeekProfit(data.getJSONObject(i).getString("lastWeekGrwth"));
-                    temp.setMonthProfit(data.getJSONObject(i).getString("lastMonthGrowth"));
-                    temp.setThreeMonthProfit(data.getJSONObject(i).getString("lastThreeMonthsGrowth"));
-                    temp.setSixMonthProfit(data.getJSONObject(i).getString("lastSixMonthsGrowth"));
-                    temp.setYearProfit(data.getJSONObject(i).getString("lastYearGrowth"));
-                    list.add(temp);
+                if(data != null){
+                    for(int i = 0; i < data.size(); i++){
+                        FundInformation temp = new FundInformation();
+                        temp.setFundCode(data.getJSONObject(i).getString("code"));
+                        temp.setCurNetWorth(data.getJSONObject(i).getString("netWorth"));
+                        temp.setTodayProfit(data.getJSONObject(i).getString("dayGrowth")+"%");
+                        temp.setWeekProfit(data.getJSONObject(i).getString("lastWeekGrowth")+"%");
+                        temp.setMonthProfit(data.getJSONObject(i).getString("lastMonthGrowth")+"%");
+                        temp.setThreeMonthProfit(data.getJSONObject(i).getString("lastThreeMonthsGrowth")+"%");
+                        temp.setSixMonthProfit(data.getJSONObject(i).getString("lastSixMonthsGrowth")+"%");
+                        temp.setYearProfit(data.getJSONObject(i).getString("lastYearGrowth")+"%");
+                        if(temp.getCurNetWorth() != null && temp.getCurNetWorth().length() < 16)
+                            list.add(temp);
+                    }
+                    fundInformationService.insertFundInformation(list);
                 }
                 codeStr = "";
             }else{

@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.boot.mapper.FundInformationMapper">
-
+    <insert id="insertFundInformation" parameterType="java.util.List">
+        insert into fundinformation
+        (id,fundcode,curNetWorth,todayProfit,weekProfit,
+        monthProfit,threeMonthProfit,sixMonthProfit,yearProfit)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (CONCAT(date_format(NOW(), '%Y%m%d%H%i%s'),REPLACE(UUID(),'-',"")),
+            #{item.fundCode},
+            #{item.curNetWorth},
+            #{item.todayProfit},
+            #{item.weekProfit},
+            #{item.monthProfit},
+            #{item.threeMonthProfit},
+            #{item.sixMonthProfit},
+            #{item.yearProfit})
+        </foreach>
+    </insert>
 </mapper>
