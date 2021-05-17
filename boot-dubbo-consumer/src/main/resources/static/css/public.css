@@ -169,3 +169,14 @@ h2.method{ font-size:18px; line-height:45px; padding-left:5px;}
     .noFind{ padding-top:0;}
     *[pc]{ display:none;}
 }
+
+.calcBox{
+    height: 330px;
+    width: 500px;
+    margin: auto;
+    margin-top: 120px;
+}
+
+#calc{
+    background-color: #dddddd;
+}

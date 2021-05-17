@@ -35,6 +35,7 @@ public class LoginController {
             UserInformation userInformation = userInformationService.selectUserInformation(userPhone);
             redisTemplate.opsForValue().set("userPhone",userPhone);
             redisTemplate.opsForValue().set("userPwd",userPwd);
+            redisTemplate.opsForValue().set("userId",String.valueOf(flag.getId()));
             if(userInformation.getNickName() != null)
                 redisTemplate.opsForValue().set("nickName",userInformation.getNickName());
             if(userInformation.getUserRole() != null)

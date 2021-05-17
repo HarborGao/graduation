@@ -1,10 +1,8 @@
 package com.boot.tools;
 
 import com.alibaba.fastjson.JSONException;
-import com.alibaba.fastjson.JSONObject;
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
-import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.xml.ws.http.HTTPException;
 import java.io.IOException;

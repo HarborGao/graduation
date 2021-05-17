@@ -31,4 +31,39 @@
         </set>
         where userPhone = #{userPhone}
     </update>
+
+    <select id="selectUserByCondition" parameterType="java.util.Map"
+            resultType="com.boot.entity.UserInformation">
+        select * from userinformation
+        <where>
+            <if test="userPhone != null">
+                and userPhone like "${userPhone}%"
+            </if>
+            <if test="nickName != null">
+                and nickName like "${nickName}%"
+            </if>
+        </where>
+        limit #{pageNo},#{pageSize}
+    </select>
+
+    <select id="selectUserByConditionCount" parameterType="java.util.Map"
+        resultType="java.lang.Integer">
+        select count(*) from userinformation
+        <where>
+            <if test="userPhone != null">
+                and userPhone like "${userPhone}%"
+            </if>
+            <if test="nickName != null">
+                and nickName like "${nickName}%"
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteUser" parameterType="java.lang.String">
+        delete from funduser where userPhone = #{userPhone}
+    </delete>
+
+    <delete id="deleteUserInformation" parameterType="java.lang.String">
+        delete from userinformation where userPhone = #{userPhone}
+    </delete>
 </mapper>

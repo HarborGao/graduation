@@ -18,4 +18,39 @@
             #{item.yearProfit})
         </foreach>
     </insert>
+
+    <select id="selectFundByCondition" parameterType="java.util.Map" resultType="com.boot.entity.FundResult">
+        select a.fundCode,a.fundName,b.curNetWorth,b.todayProfit,b.weekProfit,b.monthProfit,
+        b.sixMonthProfit,b.yearProfit from funddictionary a,fundinformation b
+        <where>
+            a.fundCode = b.fundCode
+            <if test="fundCode != null">
+                and a.fundCode like "${fundCode}%"
+            </if>
+            <if test="fundName != null">
+                and a.fundName like "${fundName}%"
+            </if>
+            <if test="fundType != null">
+                and a.fundType = #{fundType}
+            </if>
+        </where>
+        order by #{timeSelect} desc
+        limit #{pageNo},#{pageSize}
+    </select>
+
+    <select id="selectFundByConditionCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(*) from funddictionary a,fundinformation b
+        <where>
+            a.fundCode = b.fundCode
+            <if test="fundCode != null">
+                and a.fundCode like "${fundCode}%"
+            </if>
+            <if test="fundName != null">
+                and a.fundName like "${fundName}%"
+            </if>
+            <if test="fundType != null">
+                and a.fundType = #{fundType}
+            </if>
+        </where>
+    </select>
 </mapper>

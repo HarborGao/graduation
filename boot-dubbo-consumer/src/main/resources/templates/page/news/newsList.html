@@ -18,37 +18,48 @@
 		<form class="layui-form">
 			<div class="layui-inline">
 				<div class="layui-input-inline">
-					<input type="text" class="layui-input searchVal" placeholder="请输入搜索的内容" />
+					基金代码<input type="text" id="fundCode" class="layui-input searchVal" placeholder="请输入基金代码" />
 				</div>
-				<a class="layui-btn search_btn" data-type="reload">搜索</a>
-			</div>
-			<div class="layui-inline">
-				<a class="layui-btn layui-btn-normal addNews_btn">添加文章</a>
-			</div>
-			<div class="layui-inline">
-				<a class="layui-btn layui-btn-danger layui-btn-normal delAll_btn">批量删除</a>
+				<div class="layui-input-inline">
+					基金名称<input type="text" id="fundName" class="layui-input searchVal" placeholder="请输入基金名称" />
+				</div>
+				<div class="layui-input-inline">
+					基金类型
+					<select name="type" id="fundType" lay-verify="">
+						<option value="">请选择基金类型</option>
+						<option value="债券型">债券型</option>
+						<option value="指数型">指数型</option>
+						<option value="混合型">混合型</option>
+						<option value="股票型">股票型</option>
+						<option value="QDII">QDII</option>
+					</select>
+				</div>
+				<div class="layui-input-inline">
+					时间选择
+					<select name="time" lay-verify="">
+						<option value="">请选择时间</option>
+						<option value="当日收益">当日收益</option>
+						<option value="近一周收益">近一周收益</option>
+						<option value="近一月收益">近一月收益</option>
+						<option value="近半年收益">近半年收益</option>
+						<option value="近一年收益">近一年收益</option>
+					</select>
+				</div>
+				<div>
+					<a class="layui-btn search_btn" data-type="reload">搜索</a>
+				</div>
+
 			</div>
 		</form>
 	</blockquote>
 	<table id="newsList" lay-filter="newsList"></table>
-	<!--审核状态-->
-	<script type="text/html" id="newsStatus">
-		{{#  if(d.newsStatus == "1"){ }}
-		<span class="layui-red">等待审核</span>
-		{{#  } else if(d.newsStatus == "0"){ }}
-		<span class="layui-blue">已存草稿</span>
-		{{#  } else { }}
-			审核通过
-		{{#  }}}
-	</script>
 
 	<!--操作-->
 	<script type="text/html" id="newsListBar">
-		<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-		<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
-		<a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="look">预览</a>
+		<a class="layui-btn layui-btn-xs" lay-event="collect">收藏</a>
 	</script>
 </form>
+<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="newsList.js"></script>
 </body>

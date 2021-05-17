@@ -9,6 +9,4 @@ public class FundUser implements Serializable {
     private int id;
     private String userPhone;
     private String userPwd;
-    private int age;
-    private int gender;
 }

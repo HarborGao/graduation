@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.mapper.UserCollectionMapper">
+    <insert id="insertUserCollection" parameterType="com.boot.entity.UserCollection">
+        insert into usercollection values(CONCAT(date_format(NOW(), '%Y%m%d%H%i%s'),REPLACE(UUID(),'-',"")),
+        #{userId},#{fundCode},#{fundName},#{addNet},#{addProfit},NOW())
+    </insert>
+
+    <select id="selectCollectionByUserId" parameterType="java.util.Map" resultType="com.boot.entity.FundResult">
+        select a.fundCode,a.fundName,curNetWorth,todayProfit,weekProfit,monthProfit,sixMonthProfit,yearProfit
+            from usercollection a,fundinformation b where a.fundCode = b.fundCode and a.userId = #{userId}
+            limit #{pageNo},#{pageSize}
+    </select>
+
+    <select id="selectCollectionByUserIdCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(*) from usercollection a,fundinformation b where a.fundCode = b.fundCode and a.userId = #{userId}
+    </select>
+
+    <delete id="deleteCollectionByCode" parameterType="java.util.Map">
+        delete from usercollection where userId = #{userId} and fundCode = #{fundCode}
+    </delete>
+</mapper>
